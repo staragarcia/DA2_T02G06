@@ -7,7 +7,7 @@
 Dataset readParseDataset(const std::string& id) {
     Dataset dataset;
     std::string line;
-    std::ifstream truckFile("/datasets/TruckAndPallets_" + id + ".csv");
+    std::ifstream truckFile("datasets/TruckAndPallets_" + id + ".csv");
     
     if (!truckFile.is_open()) {
         std::cerr << "Could not open truck file.\n";
