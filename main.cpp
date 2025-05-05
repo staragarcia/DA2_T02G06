@@ -64,12 +64,11 @@ void handleMenuSelection(int choice, Dataset &dataset) {
 }
 
 void handleAlgorithmSelection(int choice, const Dataset &dataset) {
-    cout << "\nRunning algorithm...\n";
+    cout << "\nRunning algorithm...\n" << "\n";
 
     switch (choice) {
         case 1: {
-            int maxProfit = bruteForceKnapsack(dataset.pallets, dataset.truckCapacity, 0, 0, 0, maxProfit);
-            cout << "\nMax Profit using Brute Force: " << maxProfit << endl;
+            bruteForceKnapsack(dataset);
             break;
         }
         case 2:

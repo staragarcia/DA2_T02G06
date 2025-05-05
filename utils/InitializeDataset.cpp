@@ -33,14 +33,16 @@ Dataset readParseDataset(const std::string& id) {
 
     std::getline(palletFile, line); //Skip first line
 
-    for (int i = 0; i < numPallets; i++) {
-        std::getline(palletFile, line);
+    while (std::getline(palletFile, line)) {
+        if (line.empty()) continue;
+
         std::istringstream ss(line);
         Pallet p;
         char comma;
 
-        ss >> p.id >> comma >> p.weight >> comma >> p.profit;
-        dataset.pallets.push_back(p);
+        if (ss >> p.id >> comma >> p.weight >> comma >> p.profit) {
+            dataset.pallets.push_back(p);
+        }
     }
 
     palletFile.close();
