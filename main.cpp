@@ -68,7 +68,7 @@ void handleAlgorithmSelection(int choice, const Dataset &dataset) {
 
     switch (choice) {
         case 1: {
-            int maxProfit = bruteForceKnapsack(dataset.pallets, dataset.truckCapacity, 0, 0, 0, maxProfit);
+            int maxProfit = bruteForceKnapsack(dataset);
             cout << "\nMax Profit using Brute Force: " << maxProfit << endl;
             break;
         }
