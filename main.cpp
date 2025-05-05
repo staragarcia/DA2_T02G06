@@ -1,8 +1,9 @@
 #include <iostream>
+#include "utils/structs.h"
 #include <stdio.h>
 #include <vector>
-#include "utils\structs.h"
-#include "utils\InitializeDataset.cpp"
+#include "algorithms/bruteForce.cpp"
+#include "utils\initializeDataset.cpp"
 
 using namespace std;
 
@@ -17,6 +18,17 @@ cout << "\n=====================================\n";
      cout << "Enter your choice: ";
 }
 
+
+void displayAlgorithmOptions() {  
+         cout << "1. Brute Force\n";
+         cout << "2. TBA\n";
+         cout << "=====================================\n";
+         cout << "Enter your choice: ";
+    }
+
+
+void handleAlgorithmSelection(int choice, const Dataset &dataset);
+
 void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
         case 1: {
@@ -25,10 +37,43 @@ void handleMenuSelection(int choice, Dataset &dataset) {
             cin >> datasetId;
             dataset = readParseDataset(datasetId);
             cout << "Dataset loaded successfully.\n";
+            cout << "=====================================\n";
+            cout << "Pick an algorithm to run:\n";
+        
+            int algorithmChoice;
+            while (true) {
+                displayAlgorithmOptions();
+                cin >> algorithmChoice;
+
+                if (algorithmChoice == 1) {
+                    handleAlgorithmSelection(algorithmChoice, dataset);
+                    break;
+                } else {
+                    cout << "Invalid choice. Please try again.\n";
+                }
+            }
             break;
         }
         case 2:
             cout << "Exiting...\n";
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
+    }
+}
+
+void handleAlgorithmSelection(int choice, const Dataset &dataset) {
+    cout << "\nRunning algorithm...\n";
+
+    switch (choice) {
+        case 1: {
+            int maxProfit = bruteForceKnapsack(dataset.pallets, dataset.truckCapacity, 0, 0, 0, maxProfit);
+            cout << "\nMax Profit using Brute Force: " << maxProfit << endl;
+            break;
+        }
+        case 2:
+            cout << "TBA\n";
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
