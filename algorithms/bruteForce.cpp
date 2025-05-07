@@ -4,7 +4,8 @@
 
 using namespace std;
 
-int bruteForceKnapsack(const vector<Pallet>& pallets, int truckCapacity, int index, int currentWeight, int currentProfit, int& maxProfit) {
+vector<Pallet> bruteForceKnapsack (Dataset& dataset, int &totalWeight, int &totalProfit) {
+    vector<Pallet> selectedPallets = {};
     cout << "\n(Isto ainda nao esta implementado)\n";
-    return 0;
+    return selectedPallets;
 }
