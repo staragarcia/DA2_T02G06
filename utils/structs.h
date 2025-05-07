@@ -9,7 +9,8 @@ using namespace std;
 typedef struct {
     int id;       
     int weight;          
-    int profit;         
+    int profit;      
+    float ratio;   
 } Pallet;
 
 typedef struct {

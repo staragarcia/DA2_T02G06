@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <vector>
 #include "algorithms/bruteForce.cpp"
-#include "utils\initializeDataset.cpp"
+#include "utils/InitializeDataset.cpp"
+#include "algorithms/Greedy.cpp"
 
 using namespace std;
 
@@ -21,13 +22,35 @@ cout << "\n=====================================\n";
 
 void displayAlgorithmOptions() {  
          cout << "1. Brute Force\n";
-         cout << "2. TBA\n";
+         cout << "2. Greedy Approach\n";
+         cout << "3. TBA\n";
          cout << "=====================================\n";
          cout << "Enter your choice: ";
+}
+
+void handleAlgorithmSelection(int choice, Dataset &dataset) {
+    cout << "\nRunning algorithm...\n";
+    vector<Pallet> selected_pallets;
+    int totalWeight, totalProfit;
+
+    switch (choice) {
+        case 1: 
+            cout << "\nMax Profit using Brute Force: " << endl;
+            break;
+        case 2:
+            selected_pallets = greedyKnapsack(dataset, totalWeight, totalProfit);
+            cout << "\nSelected Pallets using Greedy Approach:\n";
+            for (const Pallet &p : selected_pallets) {
+                cout << "Pallet ID: " << p.id << ", Weight: " << p.weight << ", Profit: " << p.profit << endl;
+            }
+            cout << "\nTotal Profit: " << totalProfit << endl;
+            cout << "\nTotal Weight: " << totalWeight << endl;
+            break;
+        default:
+            cout << "Invalid choice. Please try again.\n";
+            break;
     }
-
-
-void handleAlgorithmSelection(int choice, const Dataset &dataset);
+}
 
 void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
@@ -45,7 +68,7 @@ void handleMenuSelection(int choice, Dataset &dataset) {
                 displayAlgorithmOptions();
                 cin >> algorithmChoice;
 
-                if (algorithmChoice == 1) {
+                if (algorithmChoice == 1 || algorithmChoice == 2) {
                     handleAlgorithmSelection(algorithmChoice, dataset);
                     break;
                 } else {
@@ -56,24 +79,6 @@ void handleMenuSelection(int choice, Dataset &dataset) {
         }
         case 2:
             cout << "Exiting...\n";
-            break;
-        default:
-            cout << "Invalid choice. Please try again.\n";
-            break;
-    }
-}
-
-void handleAlgorithmSelection(int choice, const Dataset &dataset) {
-    cout << "\nRunning algorithm...\n";
-
-    switch (choice) {
-        case 1: {
-            int maxProfit = bruteForceKnapsack(dataset.pallets, dataset.truckCapacity, 0, 0, 0, maxProfit);
-            cout << "\nMax Profit using Brute Force: " << maxProfit << endl;
-            break;
-        }
-        case 2:
-            cout << "TBA\n";
             break;
         default:
             cout << "Invalid choice. Please try again.\n";
