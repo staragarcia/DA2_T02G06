@@ -3,9 +3,10 @@
 #include <stdio.h>
 #include <vector>
 #include <chrono>
-#include "algorithms/bruteForce.cpp"
 #include "utils/InitializeDataset.cpp"
+#include "algorithms/bruteForce.cpp"
 #include "algorithms/Greedy.cpp"
+#include "algorithms/dynamicProgramming.cpp"
 
 using namespace std;
 using namespace std::chrono;
@@ -24,8 +25,9 @@ cout << "\n=====================================\n";
 
 void displayAlgorithmOptions() {  
          cout << "1. Brute Force\n";
-         cout << "2. Greedy Approach\n";
-         cout << "3. TBA\n";
+         cout << "2. Dynamic Programming\n";
+         cout << "3. Greedy Approach\n";
+         cout << "4. TBA\n";
          cout << "=====================================\n";
          cout << "Enter your choice: ";
 }
@@ -44,7 +46,7 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
             auto end = high_resolution_clock::now();
             auto duration = duration_cast<microseconds>(end - start); 
 
-            cout << "\nSelected Pallets using Greedy Approach:\n";
+            cout << "\nSelected Pallets using Brute Force:\n";
             for (const Pallet &p : selected_pallets) {
                 cout << "Pallet ID: " << p.id << ", Weight: " << p.weight << ", Profit: " << p.profit << endl;
             }
@@ -55,6 +57,24 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
             break;
         }
         case 2: {
+            auto start = high_resolution_clock::now();
+
+            selected_pallets = dynamicKnapsack(dataset, totalWeight, totalProfit);
+
+            auto end = high_resolution_clock::now();
+            auto duration = duration_cast<microseconds>(end - start); 
+
+            cout << "\nSelected Pallets using Dynamic Programming:\n";
+            for (const Pallet &p : selected_pallets) {
+                cout << "Pallet ID: " << p.id << ", Weight: " << p.weight << ", Profit: " << p.profit << endl;
+            }
+            cout << "\nTotal Profit: " << totalProfit << endl;
+            cout << "\nTotal Weight: " << totalWeight << endl;
+            cout << "\nExecution Time: " << duration.count() << " microseconds\n";
+            
+            break;
+        }
+        case 3: {
             auto start = high_resolution_clock::now();
 
             selected_pallets = greedyKnapsack(dataset, totalWeight, totalProfit);
@@ -82,7 +102,7 @@ void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
         case 1: {
             string datasetId;
-            cout << "Enter dataset ID: ";
+            cout << "Enter dataset ID (01-10): ";
             cin >> datasetId;
             dataset = readParseDataset(datasetId);
             cout << "Dataset loaded successfully.\n";
@@ -94,7 +114,7 @@ void handleMenuSelection(int choice, Dataset &dataset) {
                 displayAlgorithmOptions();
                 cin >> algorithmChoice;
 
-                if (algorithmChoice == 1 || algorithmChoice == 2) {
+                if (algorithmChoice == 1 || algorithmChoice == 2 || algorithmChoice == 3) {
                     handleAlgorithmSelection(algorithmChoice, dataset);
                     break;
                 } else {
