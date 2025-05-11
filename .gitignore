@@ -2,3 +2,5 @@ main
 .vscode/*
 gc
 *.exe
+build/**
+ortools/**

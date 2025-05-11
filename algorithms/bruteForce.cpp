@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<Pallet> bruteForceKnapsack(const Dataset &dataset, int &totalWeight, int &totalProfit) {
+vector<Pallet> bruteForceKnapsack(Dataset &dataset, int &totalWeight, int &totalProfit) {
 
     int maxProfit = 0;
     int n = dataset.pallets.size();

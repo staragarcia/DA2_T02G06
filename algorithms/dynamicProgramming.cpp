@@ -4,7 +4,7 @@
 
 using namespace std;
 
-vector<Pallet> dynamicKnapsack (Dataset& dataset, int &totalWeight, int &totalProfit) {
+vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalProfit) {
     int i = dataset.pallets.size();
     int j = dataset.truckCapacity;
 
