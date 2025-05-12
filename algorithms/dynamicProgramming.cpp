@@ -24,13 +24,14 @@ vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalPro
 
     vector<Pallet> selectedPallets = {};
     totalProfit = table[i][j];
+    int profit = totalProfit;
     totalWeight = 0;
     int remainingCapacity = j;
 
-    for (int k = i; k > 0 && totalProfit > 0; k--) {
-        if (totalProfit != table[k - 1][remainingCapacity]) { //item was included
+    for (int k = i; k > 0 && profit > 0; k--) {
+        if (profit != table[k - 1][remainingCapacity]) { //item was included
             selectedPallets.push_back(dataset.pallets[k - 1]);
-            totalProfit -= dataset.pallets[k - 1].profit;
+            profit -= dataset.pallets[k - 1].profit;
             totalWeight += dataset.pallets[k - 1].weight;
             remainingCapacity -= dataset.pallets[k - 1].weight;
         }
