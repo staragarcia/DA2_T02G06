@@ -4,6 +4,16 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * @details  Time Complexity: O(i × j)
+ * 
+ * @param dataset 
+ * @param totalWeight 
+ * @param totalProfit 
+ * @return vector<Pallet> 
+ */
+
 vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalProfit) {
     int i = dataset.pallets.size();
     int j = dataset.truckCapacity;
@@ -28,7 +38,7 @@ vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalPro
     totalWeight = 0;
     int remainingCapacity = j;
 
-    for (int k = i; k > 0 && profit > 0; k--) {
+    for (int k = i; k > 0 && profit > 0; k--) { // Traceback the selected items - O(i)
         if (profit != table[k - 1][remainingCapacity]) { //item was included
             selectedPallets.push_back(dataset.pallets[k - 1]);
             profit -= dataset.pallets[k - 1].profit;
