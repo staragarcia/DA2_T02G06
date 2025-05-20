@@ -50,7 +50,8 @@ void displayAlgorithmOptions() {
     cout << yellow << "2." << reset << " Dynamic Programming\n";
     cout << yellow << "3." << reset << " Greedy Approach\n";
     cout << yellow << "4." << reset << " Integer Linear Programming (ILP)\n";
-    cout << yellow << "5." << reset << " Go Back\n";
+    cout << yellow << "5." << reset << " Run All Algorithms\n";
+    cout << yellow << "6." << reset << " Go Back\n";
     cout << gray << "=====================================\n" << reset;
     cout << blue << "Enter your choice: " << reset;
 }
@@ -92,6 +93,35 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
     }
 }
 
+void runAllAlgorithms(Dataset &dataset) {
+    cout << gray << "\n=====================================\n" << reset;
+    cout << "Running all algorithms on the current dataset:\n" << reset;
+
+    for (size_t i = 0; i < knapsackAlgorithms.size(); ++i) {
+        cout << gray << "-------------------------------------\n" << reset;
+        int totalWeight = 0, totalProfit = 0;
+        auto start = high_resolution_clock::now();
+        vector<Pallet> selected_pallets;
+        bool success = false;
+        try {
+            selected_pallets = knapsackAlgorithms[i](dataset, totalWeight, totalProfit);
+            success = true;
+        } catch (...) {
+            cout << red << "An error occurred while running " << knapsackAlgorithmNames[i] << "." << reset << endl;
+        }
+        auto end = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(end - start);
+
+        cout << blue << knapsackAlgorithmNames[i] << ":" << reset << endl;
+        if (success) {
+            cout << green << "  Success!" << reset << endl;
+            cout << "  Total Profit: " << gray << totalProfit << reset << endl;
+            cout << "  Total Weight: " << gray << totalWeight << reset << endl;
+            cout << "  Execution Time: " << gray << duration.count() << reset << " microseconds" << endl;
+        }
+    }
+}
+
 void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
         case 1: {
@@ -116,7 +146,13 @@ void handleMenuSelection(int choice, Dataset &dataset) {
             while (true) {
                 displayAlgorithmOptions();
                 cin >> algorithmChoice;
-                if (algorithmChoice == 5) break;
+                if (algorithmChoice == 5) {
+                    runAllAlgorithms(dataset);
+                    cout << gray << "=====================================\n" << reset;
+                    cout << blue << "Pick an algorithm to run:\n" << reset;
+                    continue;
+                }
+                if (algorithmChoice == 6) break;
                 handleAlgorithmSelection(algorithmChoice, dataset);
                 cout << gray << "=====================================\n" << reset;
                 cout << blue << "Pick an algorithm to run:\n" << reset;
