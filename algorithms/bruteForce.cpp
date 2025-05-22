@@ -5,6 +5,17 @@
 
 using namespace std;
 
+/**
+ * @brief Brute force solution for the 0/1 knapsack problem. Selects the best subset of pallets
+ * by checking all possible combinations.
+ * 
+ * @details The asymptotic complexity of this algorithm is Θ(2^n), where n is the number of pallets.
+ * 
+ * @param dataset pallets and truck capacity
+ * @param totalWeight total weight of selected pallets
+ * @param totalProfit total profit of selected pallets
+ * @return vector<Pallet> selected pallets
+ */
 vector<Pallet> bruteForceKnapsack(Dataset &dataset, int &totalWeight, int &totalProfit) {
 
     int maxProfit = 0;

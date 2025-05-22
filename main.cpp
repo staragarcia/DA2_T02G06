@@ -4,6 +4,7 @@
 #include <vector>
 #include <chrono>
 #include "utils/InitializeDataset.cpp"
+#include "algorithms/backtrackingBruteForce.cpp"
 #include "algorithms/bruteForce.cpp"
 #include "algorithms/Greedy.cpp"
 #include "algorithms/dynamicProgramming.cpp"
@@ -14,6 +15,7 @@ using namespace std::chrono;
 
 vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
     bruteForceKnapsack,
+    backtrackingKnapsack,
     dynamicKnapsack,
     greedyKnapsack,
     SolveKnapsackILP
@@ -21,6 +23,7 @@ vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
 
 vector<string> knapsackAlgorithmNames = {
     "Brute Force",
+    "Brute Force with Backtracking",
     "Dynamic Programming",
     "Greedy Approach",
     "Integer Linear Programming (ILP)"
@@ -40,15 +43,16 @@ cout << "\n=====================================\n";
 
 void displayAlgorithmOptions() {  
          cout << "1. Brute Force\n";
-         cout << "2. Dynamic Programming\n";
-         cout << "3. Greedy Approach\n";
-         cout << "4. Integer Linear Programming (ILP)\n";
+         cout << "2. Brute Force with Backtracking\n";
+         cout << "3. Dynamic Programming\n";
+         cout << "4. Greedy Approach\n";
+         cout << "5. Integer Linear Programming (ILP)\n";
          cout << "=====================================\n";
          cout << "Enter your choice: ";
 }
 
 void handleAlgorithmSelection(int choice, Dataset &dataset) {
-    if (choice < 1 || choice > 4) {
+    if (choice < 1 || choice > 5) {
         cout << "Invalid choice. Please try again.\n";
         return;
     }

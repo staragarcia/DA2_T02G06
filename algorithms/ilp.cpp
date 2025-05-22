@@ -3,6 +3,18 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @brief Function that solves the 0/1 knapsack problem using Integer Linear Programming (ILP) with OR-Tools.
+ * 
+ * @details This function uses the OR-Tools library to create a Mixed Integer Programming (MIP) solver.
+ * The function's worst-case asymptotic complexity is O(2^N), where n is the number of items (pallets) in the dataset,
+ * however, in pratice, the solver is efficient and can solve large instances of the problem.
+ * 
+ * @param dataset vector of pallets and truck capacity
+ * @param totalWeight used to return the total weight of the selected pallets
+ * @param totalProfit used to return the total profit of the selected pallets
+ * @return std::vector<Pallet> selected pallets
+ */
 std::vector<Pallet> SolveKnapsackILP(Dataset& dataset, int &totalWeight, int &totalProfit) {
     const int num_items = dataset.pallets.size();
 
