@@ -9,6 +9,7 @@
 #include "algorithms/Greedy.cpp"
 #include "algorithms/dynamicProgramming.cpp"
 #include "algorithms/ilp.cpp"
+#include <limits>
 
 using namespace std;
 using namespace std::chrono;
@@ -19,6 +20,14 @@ vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
     dynamicKnapsack,
     greedyKnapsack,
     SolveKnapsackILP
+};
+
+vector<int> maxDatasetSizePerAlgorithm = {
+    25, // Brute Force, with 25 pallets should take around 20 seconds
+    34, // Brute Force with Backtracking
+    std::numeric_limits<int>::max(), // Dynamic Programming
+    std::numeric_limits<int>::max(), // Greedy Approach
+    std::numeric_limits<int>::max() // Integer Linear Programming (ILP)
 };
 
 vector<string> knapsackAlgorithmNames = {
@@ -54,6 +63,10 @@ void displayAlgorithmOptions() {
 void handleAlgorithmSelection(int choice, Dataset &dataset) {
     if (choice < 1 || choice > 5) {
         cout << "Invalid choice. Please try again.\n";
+        return;
+    }
+    if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[choice-1]) {
+        cout << "Dataset size exceeds the maximum limit for this algorithm.\n";
         return;
     }
     cout << "\nRunning algorithm...\n";
