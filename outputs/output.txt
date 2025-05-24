@@ -1,0 +1,46 @@
+Results for all algorithms:
+Brute Force:
+Pallet ID: 5, Weight: 29, Profit: 10
+Pallet ID: 6, Weight: 26, Profit: 10
+Pallet ID: 8, Weight: 22, Profit: 10
+Pallet ID: 9, Weight: 20, Profit: 10
+Total Profit: 40
+Total Weight: 97
+Execution Time: 495 microseconds
+
+Brute Force with Backtracking:
+Pallet ID: 5, Weight: 29, Profit: 10
+Pallet ID: 6, Weight: 26, Profit: 10
+Pallet ID: 8, Weight: 22, Profit: 10
+Pallet ID: 9, Weight: 20, Profit: 10
+Total Profit: 40
+Total Weight: 97
+Execution Time: 17 microseconds
+
+Dynamic Programming:
+Pallet ID: 5, Weight: 29, Profit: 10
+Pallet ID: 6, Weight: 26, Profit: 10
+Pallet ID: 8, Weight: 22, Profit: 10
+Pallet ID: 9, Weight: 20, Profit: 10
+Total Profit: 40
+Total Weight: 97
+Execution Time: 840 microseconds
+
+Greedy Approach:
+Pallet ID: 9, Weight: 20, Profit: 10
+Pallet ID: 8, Weight: 22, Profit: 10
+Pallet ID: 6, Weight: 26, Profit: 10
+Pallet ID: 7, Weight: 26, Profit: 10
+Total Profit: 40
+Total Weight: 94
+Execution Time: 7 microseconds
+
+Integer Linear Programming (ILP):
+Pallet ID: 9, Weight: 20, Profit: 10
+Pallet ID: 8, Weight: 22, Profit: 10
+Pallet ID: 6, Weight: 26, Profit: 10
+Pallet ID: 7, Weight: 26, Profit: 10
+Total Profit: 40
+Total Weight: 94
+Execution Time: 8056 microseconds
+

@@ -4,12 +4,25 @@
 #include "../utils/structs.h"
 using namespace std;
 
+
+/**
+ * @brief Sorts pallets by descending order.
+ * TieBreakers are lower weight and then lower id.
+ * 
+ * @param a First pallet to compare
+ * @param b Second pallet to compare
+ * @return true if a should come before b, false otherwise
+ */
 bool sortByDescRatio(const Pallet& a, const Pallet& b) {
-    return a.ratio > b.ratio;
+    if (a.ratio != b.ratio)
+        return a.ratio > b.ratio;
+    if (a.weight != b.weight)
+        return a.weight > b.weight; 
+    return a.id < b.id;
 }
 
 /**
- * @brief 
+ * @brief Greedy Knapsack Algorithm implementation.
  * @details Final Time Complexity: O(n log n)
  * 
  * @param dataset 

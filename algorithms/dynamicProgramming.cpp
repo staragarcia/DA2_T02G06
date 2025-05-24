@@ -4,6 +4,26 @@
 
 using namespace std;
 
+
+struct State { 
+    int profit = 0;
+    vector<int> palletIndices = {};
+};
+
+
+/**
+ * @brief Helper function to compare two states based on profit and pallet indices.
+ * 
+ * @param State 
+ * @param State 
+ * @return bool (true if a is better than b, false otherwise)
+ */
+bool isBetter(const State& a, const State& b) {
+    if (a.profit != b.profit) return a.profit > b.profit;
+    if (a.palletIndices.size() != b.palletIndices.size()) return a.palletIndices.size() < b.palletIndices.size();
+    return a.palletIndices < b.palletIndices;
+}
+
 /**
  * @brief 
  * @details  Time Complexity: O(i × j)
@@ -13,39 +33,38 @@ using namespace std;
  * @param totalProfit 
  * @return vector<Pallet> 
  */
-
 vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalProfit) {
     int i = dataset.pallets.size();
     int j = dataset.truckCapacity;
 
-    vector<vector<int>> table(i + 1, vector<int>(j + 1, 0));
+    vector<vector<State>> dpTable(i + 1, vector<State>(j + 1));
 
-    for (int k = 0; k <= i; k++) {
+    for (int k = 1; k <= i; k++) { 
+        Pallet currentPallet = dataset.pallets[k - 1];
         for (int l = 0; l <= j; l++) {
-            if (k == 0 || l == 0) { //no items considered or truck has 0 capacity
-                table[k][l] = 0;
-            } else if (dataset.pallets[k - 1].weight <= l) { //table starts with no items considered at k=0 so k-1
-                table[k][l] = max(dataset.pallets[k - 1].profit + table[k - 1][l - dataset.pallets[k - 1].weight], table[k - 1][l]);
-            } else {
-                table[k][l] = table[k - 1][l];
+
+            dpTable[k][l] = dpTable[k - 1][l];      // Case 1: cannot include this pallet
+
+            if (currentPallet.weight <= l) { 
+                State includePallet = dpTable[k - 1][l - currentPallet.weight]; 
+                includePallet.profit += currentPallet.profit;
+                includePallet.palletIndices.push_back(k - 1);
+                if (isBetter(includePallet, dpTable[k][l])) {
+                    dpTable[k][l] = includePallet;      // Case 2: include this pallet
+                }
             }
         }
     }
 
-    vector<Pallet> selectedPallets = {};
-    totalProfit = table[i][j];
-    int profit = totalProfit;
+    State best = dpTable[i][j];
+    totalProfit = best.profit;
     totalWeight = 0;
-    int remainingCapacity = j;
-
-    for (int k = i; k > 0 && profit > 0; k--) { // Traceback the selected items - O(i)
-        if (profit != table[k - 1][remainingCapacity]) { //item was included
-            selectedPallets.push_back(dataset.pallets[k - 1]);
-            profit -= dataset.pallets[k - 1].profit;
-            totalWeight += dataset.pallets[k - 1].weight;
-            remainingCapacity -= dataset.pallets[k - 1].weight;
-        }
-    }
+    vector<Pallet> selectedPallets;
     
+    for (int index : best.palletIndices) {
+        selectedPallets.push_back(dataset.pallets[index]);
+        totalWeight += dataset.pallets[index].weight;
+    }
+
     return selectedPallets;
 }

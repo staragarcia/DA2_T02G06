@@ -155,6 +155,17 @@ void runAllAlgorithms(Dataset &dataset) {
         cout << blue << knapsackAlgorithmNames[i] << ":" << reset << endl;
         if (success) {
             cout << green << "  Success!" << reset << endl;
+            cout << "  Selected Pallet IDs: " << gray;
+            vector<int> ids;
+            for (const Pallet &p : selected_pallets) {
+                ids.push_back(p.id);
+            }
+            sort(ids.begin(), ids.end());
+            for (size_t i = 0; i < ids.size(); ++i) {
+                cout << ids[i];
+                if (i < ids.size() - 1) cout << ", ";
+            }
+            cout << reset << endl;
             cout << "  Total Profit: " << gray << totalProfit << reset << endl;
             cout << "  Total Weight: " << gray << totalWeight << reset << endl;
             cout << "  Execution Time: " << gray << duration.count() << reset << " microseconds" << endl;
