@@ -10,6 +10,7 @@
 #include "algorithms/dynamicProgramming.cpp"
 #include "algorithms/ilp.cpp"
 #include <limits>
+#include <fstream> 
 
 using namespace std;
 using namespace std::chrono;
@@ -106,12 +107,29 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
         cout << "\nTotal Profit: " << gray << totalProfit << reset;
         cout << "\nTotal Weight: " << gray << totalWeight << reset;
         cout << "\nExecution Time: " << gray << duration.count() << reset << " microseconds\n" << endl;
+
+        //Output file
+        std::ofstream outfile("outputs/output.txt");
+        outfile << "Selected Pallets using " << knapsackAlgorithmNames[choice-1] << ":\n";
+        for (const Pallet &p : selected_pallets) {
+            outfile << "Pallet ID: " << p.id
+                    << ", Weight: " << p.weight
+                    << ", Profit: " << p.profit << std::endl;
+        }
+        outfile << "\nTotal Profit: " << totalProfit;
+        outfile << "\nTotal Weight: " << totalWeight;
+        outfile << "\nExecution Time: " << duration.count() << " microseconds\n";
+        outfile.close();
     }
 }
 
 void runAllAlgorithms(Dataset &dataset) {
     cout << gray << "\n=====================================\n" << reset;
     cout << "Running all algorithms on the current dataset:\n" << reset;
+
+    std::ofstream outfile("outputs/output.txt");
+    outfile << "Results for all algorithms:\n";
+    outfile.close();
 
     for (size_t i = 0; i < knapsackAlgorithms.size(); ++i) {
         cout << gray << "-------------------------------------\n" << reset;
@@ -141,6 +159,24 @@ void runAllAlgorithms(Dataset &dataset) {
             cout << "  Total Weight: " << gray << totalWeight << reset << endl;
             cout << "  Execution Time: " << gray << duration.count() << reset << " microseconds" << endl;
         }
+
+        // Append to output file
+        std::ofstream outfile("outputs/output.txt", std::ios::app);
+        outfile << knapsackAlgorithmNames[i] << ":\n";
+        if (success) {
+            for (const Pallet &p : selected_pallets) {
+                outfile << "Pallet ID: " << p.id
+                        << ", Weight: " << p.weight
+                        << ", Profit: " << p.profit << std::endl;
+            }
+            outfile << "Total Profit: " << totalProfit << std::endl;
+            outfile << "Total Weight: " << totalWeight << std::endl;
+            outfile << "Execution Time: " << duration.count() << " microseconds\n";
+        } else {
+            outfile << "Error or limit exceeded.\n";
+        }
+        outfile << std::endl;
+        outfile.close();
     }
 }
 
