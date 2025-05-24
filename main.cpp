@@ -116,6 +116,12 @@ void runAllAlgorithms(Dataset &dataset) {
     for (size_t i = 0; i < knapsackAlgorithms.size(); ++i) {
         cout << gray << "-------------------------------------\n" << reset;
         int totalWeight = 0, totalProfit = 0;
+
+        if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[i]) {
+            cout << red << "Dataset size exceeds the maximum limit for this algorithm." << reset << endl;
+            continue;
+        }
+
         auto start = high_resolution_clock::now();
         vector<Pallet> selected_pallets;
         bool success = false;
