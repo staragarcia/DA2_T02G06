@@ -10,9 +10,18 @@
 #include "algorithms/dynamicProgramming.cpp"
 #include "algorithms/ilp.cpp"
 #include <limits>
+#include <fstream> 
 
 using namespace std;
 using namespace std::chrono;
+
+// Colors
+const string blue = "\033[34m";
+const string gray = "\033[90m";
+const string yellow = "\033[33m";
+const string green = "\033[32m";
+const string red = "\033[31m";
+const string reset = "\033[0m";
 
 vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
     bruteForceKnapsack,
@@ -40,33 +49,34 @@ vector<string> knapsackAlgorithmNames = {
 
 
 void displayMenu() {  
-cout << "\n=====================================\n";
-    cout << "  Pallet Packing Optimization Tool\n";
-     cout << "=====================================\n";
-     cout << "1. Select Dataset\n";
-     cout << "2. Exit\n";
-     cout << "=====================================\n";
-     cout << "Enter your choice: ";
+    cout << gray << "\n=====================================\n" << reset;
+    cout << blue << "  Pallet Packing Optimization Tool\n" << reset;
+    cout << gray << "=====================================\n" << reset;
+    cout << yellow << "1." << reset << " Select Dataset\n";
+    cout << yellow << "2." << reset << " Exit\n";
+    cout << gray << "=====================================\n" << reset;
+    cout << blue << "Enter your choice: " << reset;
 }
 
-
 void displayAlgorithmOptions() {  
-         cout << "1. Brute Force\n";
-         cout << "2. Brute Force with Backtracking\n";
-         cout << "3. Dynamic Programming\n";
-         cout << "4. Greedy Approach\n";
-         cout << "5. Integer Linear Programming (ILP)\n";
-         cout << "=====================================\n";
-         cout << "Enter your choice: ";
+    cout << yellow << "1." << reset << " Brute Force\n";
+    cout << yellow << "2." << reset << " Brute Force with Backtracking\n";
+    cout << yellow << "3." << reset << " Dynamic Programming\n";
+    cout << yellow << "4." << reset << " Greedy Approach\n";
+    cout << yellow << "5." << reset << " Integer Linear Programming (ILP)\n";
+    cout << yellow << "6." << reset << " Run All Algorithms\n";
+    cout << yellow << "7." << reset << " Go Back\n";
+    cout << gray << "=====================================\n" << reset;
+    cout << blue << "Enter your choice: " << reset;
 }
 
 void handleAlgorithmSelection(int choice, Dataset &dataset) {
     if (choice < 1 || choice > 5) {
-        cout << "Invalid choice. Please try again.\n";
+        cout << red << "Invalid choice. Please try again.\n" << reset;
         return;
     }
     if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[choice-1]) {
-        cout << "Dataset size exceeds the maximum limit for this algorithm.\n";
+        cout << red << "Dataset size exceeds the maximum limit for this algorithm.\n" << reset;
         return;
     }
     cout << "\nRunning algorithm...\n";
@@ -75,35 +85,135 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
 
     auto start = high_resolution_clock::now();
 
-    selected_pallets = knapsackAlgorithms[choice-1](dataset, totalWeight, totalProfit);
-
-    auto end = high_resolution_clock::now();
-    auto duration = duration_cast<microseconds>(end - start); 
-
-    cout << "\nSelected Pallets using " << knapsackAlgorithmNames[choice-1] << ":\n";
-    for (const Pallet &p : selected_pallets) {
-        cout << "Pallet ID: " << p.id << ", Weight: " << p.weight << ", Profit: " << p.profit << endl;
+    bool success = false;
+    try {
+        selected_pallets = knapsackAlgorithms[choice-1](dataset, totalWeight, totalProfit);
+        success = true;
+    } catch (...) {
+        cout << red << "An error occurred while running the algorithm.\n" << reset;
     }
-    cout << "\nTotal Profit: " << totalProfit << endl;
-    cout << "\nTotal Weight: " << totalWeight << endl;
-    cout << "\nExecution Time: " << duration.count() << " microseconds\n";
+
+    if (success) {
+        cout << green << "Success!" << reset << endl;
+        auto end = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(end - start); 
+
+        cout << "\nSelected Pallets using " << knapsackAlgorithmNames[choice-1] << ":\n";
+        for (const Pallet &p : selected_pallets) {
+            cout << "Pallet ID: " << gray << p.id << reset
+                << ", Weight: " << gray << p.weight << reset
+                << ", Profit: " << gray << p.profit << reset << endl;
+        }
+        cout << "\nTotal Profit: " << gray << totalProfit << reset;
+        cout << "\nTotal Weight: " << gray << totalWeight << reset;
+        cout << "\nExecution Time: " << gray << duration.count() << reset << " microseconds\n" << endl;
+
+        //Output file
+        std::ofstream outfile("outputs/output.txt");
+        outfile << "Selected Pallets using " << knapsackAlgorithmNames[choice-1] << ":\n";
+        for (const Pallet &p : selected_pallets) {
+            outfile << "Pallet ID: " << p.id
+                    << ", Weight: " << p.weight
+                    << ", Profit: " << p.profit << std::endl;
+        }
+        outfile << "\nTotal Profit: " << totalProfit;
+        outfile << "\nTotal Weight: " << totalWeight;
+        outfile << "\nExecution Time: " << duration.count() << " microseconds\n";
+        outfile.close();
+    }
+}
+
+void runAllAlgorithms(Dataset &dataset) {
+    cout << gray << "\n=====================================\n" << reset;
+    cout << "Running all algorithms on the current dataset:\n" << reset;
+
+    std::ofstream outfile("outputs/output.txt");
+    outfile << "Results for all algorithms:\n";
+    outfile.close();
+
+    for (size_t i = 0; i < knapsackAlgorithms.size(); ++i) {
+        cout << gray << "-------------------------------------\n" << reset;
+        int totalWeight = 0, totalProfit = 0;
+
+        if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[i]) {
+            cout << red << "Dataset size exceeds the maximum limit for this algorithm." << reset << endl;
+            continue;
+        }
+
+        auto start = high_resolution_clock::now();
+        vector<Pallet> selected_pallets;
+        bool success = false;
+        try {
+            selected_pallets = knapsackAlgorithms[i](dataset, totalWeight, totalProfit);
+            success = true;
+        } catch (...) {
+            cout << red << "An error occurred while running " << knapsackAlgorithmNames[i] << "." << reset << endl;
+        }
+        auto end = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(end - start);
+
+        cout << blue << knapsackAlgorithmNames[i] << ":" << reset << endl;
+        if (success) {
+            cout << green << "  Success!" << reset << endl;
+            cout << "  Total Profit: " << gray << totalProfit << reset << endl;
+            cout << "  Total Weight: " << gray << totalWeight << reset << endl;
+            cout << "  Execution Time: " << gray << duration.count() << reset << " microseconds" << endl;
+        }
+
+        // Append to output file
+        std::ofstream outfile("outputs/output.txt", std::ios::app);
+        outfile << knapsackAlgorithmNames[i] << ":\n";
+        if (success) {
+            for (const Pallet &p : selected_pallets) {
+                outfile << "Pallet ID: " << p.id
+                        << ", Weight: " << p.weight
+                        << ", Profit: " << p.profit << std::endl;
+            }
+            outfile << "Total Profit: " << totalProfit << std::endl;
+            outfile << "Total Weight: " << totalWeight << std::endl;
+            outfile << "Execution Time: " << duration.count() << " microseconds\n";
+        } else {
+            outfile << "Error or limit exceeded.\n";
+        }
+        outfile << std::endl;
+        outfile.close();
+    }
 }
 
 void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
         case 1: {
             string datasetId;
-            cout << "Enter dataset ID (01-10): ";
-            cin >> datasetId;
+            while (true) {
+                cout << blue << "Enter dataset ID " << gray << "(01-10)" << reset << blue << ": " << reset;
+                cin >> datasetId;
+
+                if (datasetId.length() != 2 || datasetId < "01" || datasetId > "10") {
+                    cout << red << "Invalid dataset ID. Please enter a value between 01 and 10.\n" << reset;
+                    cout << gray << "=====================================\n" << reset;
+                    continue; 
+                }
+                break; 
+            }
+
             dataset = readParseDataset(datasetId);
-            cout << "=====================================\n";
-            cout << "Pick an algorithm to run:\n";
+            cout << gray << "=====================================\n" << reset;
+            cout << blue << "Pick an algorithm to run:\n" << reset;
         
             int algorithmChoice;
             while (true) {
                 displayAlgorithmOptions();
                 cin >> algorithmChoice;
+                if (algorithmChoice == 6) {
+                    runAllAlgorithms(dataset);
+                    cout << gray << "=====================================\n" << reset;
+                    cout << blue << "Pick an algorithm to run:\n" << reset;
+                    continue;
+                }
+                if (algorithmChoice == 7) break;
                 handleAlgorithmSelection(algorithmChoice, dataset);
+                cout << gray << "=====================================\n" << reset;
+                cout << blue << "Pick an algorithm to run:\n" << reset;
             }
             break;
         }
@@ -111,7 +221,7 @@ void handleMenuSelection(int choice, Dataset &dataset) {
             cout << "Exiting...\n";
             break;
         default:
-            cout << "Invalid choice. Please try again.\n";
+            cout << red << "Invalid choice. Please try again.\n" << reset;
             break;
     }
 }
@@ -119,7 +229,6 @@ void handleMenuSelection(int choice, Dataset &dataset) {
 int main() {
     Dataset dataset;
     int choice;
-
     while (true) {
         displayMenu();
         cin >> choice;

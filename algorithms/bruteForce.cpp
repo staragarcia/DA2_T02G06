@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <algorithm>
 #include "../utils/structs.h"
+#include "../utils/compareSolutions.h"
 
 using namespace std;
 
@@ -37,7 +39,7 @@ vector<Pallet> bruteForceKnapsack(Dataset &dataset, int &totalWeight, int &total
             }
         }
 
-        if (currentWeight <= capacity && currentProfit > maxProfit) {
+        if (better(currentWeight, currentProfit, maxProfit, currentSubset, bestSubset, capacity)) {
             maxProfit = currentProfit;
             bestSubset = currentSubset; 
             bestWeight = currentWeight;   
