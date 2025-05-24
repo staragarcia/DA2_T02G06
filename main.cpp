@@ -4,10 +4,12 @@
 #include <vector>
 #include <chrono>
 #include "utils/InitializeDataset.cpp"
+#include "algorithms/backtrackingBruteForce.cpp"
 #include "algorithms/bruteForce.cpp"
 #include "algorithms/Greedy.cpp"
 #include "algorithms/dynamicProgramming.cpp"
 #include "algorithms/ilp.cpp"
+#include <limits>
 
 using namespace std;
 using namespace std::chrono;
@@ -22,13 +24,23 @@ const string reset = "\033[0m";
 
 vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
     bruteForceKnapsack,
+    backtrackingKnapsack,
     dynamicKnapsack,
     greedyKnapsack,
     SolveKnapsackILP
 };
 
+vector<int> maxDatasetSizePerAlgorithm = {
+    25, // Brute Force, with 25 pallets should take around 20 seconds
+    34, // Brute Force with Backtracking
+    std::numeric_limits<int>::max(), // Dynamic Programming
+    std::numeric_limits<int>::max(), // Greedy Approach
+    1000000 // Integer Linear Programming (ILP)
+};
+
 vector<string> knapsackAlgorithmNames = {
     "Brute Force",
+    "Brute Force with Backtracking",
     "Dynamic Programming",
     "Greedy Approach",
     "Integer Linear Programming (ILP)"
@@ -47,22 +59,26 @@ void displayMenu() {
 
 void displayAlgorithmOptions() {  
     cout << yellow << "1." << reset << " Brute Force\n";
-    cout << yellow << "2." << reset << " Dynamic Programming\n";
-    cout << yellow << "3." << reset << " Greedy Approach\n";
-    cout << yellow << "4." << reset << " Integer Linear Programming (ILP)\n";
-    cout << yellow << "5." << reset << " Run All Algorithms\n";
-    cout << yellow << "6." << reset << " Go Back\n";
+    cout << yellow << "2." << reset << " Brute Force with Backtracking\n";
+    cout << yellow << "3." << reset << " Dynamic Programming\n";
+    cout << yellow << "4." << reset << " Greedy Approach\n";
+    cout << yellow << "5." << reset << " Integer Linear Programming (ILP)\n";
+    cout << yellow << "6." << reset << " Run All Algorithms\n";
+    cout << yellow << "7." << reset << " Go Back\n";
     cout << gray << "=====================================\n" << reset;
     cout << blue << "Enter your choice: " << reset;
 }
 
 void handleAlgorithmSelection(int choice, Dataset &dataset) {
-    if (choice < 1 || choice > 4) {
+    if (choice < 1 || choice > 5) {
         cout << red << "Invalid choice. Please try again.\n" << reset;
         return;
     }
-    cout << "\nRunning algorithm... " << reset;
-
+    if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[choice-1]) {
+        cout << red << "Dataset size exceeds the maximum limit for this algorithm.\n" << reset;
+        return;
+    }
+    cout << "\nRunning algorithm...\n";
     vector<Pallet> selected_pallets;
     int totalWeight, totalProfit;
 
@@ -146,13 +162,13 @@ void handleMenuSelection(int choice, Dataset &dataset) {
             while (true) {
                 displayAlgorithmOptions();
                 cin >> algorithmChoice;
-                if (algorithmChoice == 5) {
+                if (algorithmChoice == 6) {
                     runAllAlgorithms(dataset);
                     cout << gray << "=====================================\n" << reset;
                     cout << blue << "Pick an algorithm to run:\n" << reset;
                     continue;
                 }
-                if (algorithmChoice == 6) break;
+                if (algorithmChoice == 7) break;
                 handleAlgorithmSelection(algorithmChoice, dataset);
                 cout << gray << "=====================================\n" << reset;
                 cout << blue << "Pick an algorithm to run:\n" << reset;

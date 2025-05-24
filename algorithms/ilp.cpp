@@ -3,7 +3,20 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * @brief Function that solves the 0/1 knapsack problem using Integer Linear Programming (ILP) with OR-Tools.
+ * 
+ * @details This function uses the OR-Tools library to create a Mixed Integer Programming (MIP) solver.
+ * The function's worst-case asymptotic complexity is O(2^N), where n is the number of items (pallets) in the dataset,
+ * however, in pratice, the solver is efficient and can solve large instances of the problem.
+ * 
+ * @param dataset vector of pallets and truck capacity
+ * @param totalWeight used to return the total weight of the selected pallets
+ * @param totalProfit used to return the total profit of the selected pallets
+ * @return std::vector<Pallet> selected pallets
+ */
 std::vector<Pallet> SolveKnapsackILP(Dataset& dataset, int &totalWeight, int &totalProfit) {
+    double epsilon = 1e-6;
     const int num_items = dataset.pallets.size();
 
     // Create the MIP solver with the CBC backend.
@@ -24,14 +37,12 @@ std::vector<Pallet> SolveKnapsackILP(Dataset& dataset, int &totalWeight, int &to
     // Define the objective: maximize sum(values[i] * x[i])
     operations_research::MPObjective* objective = solver.MutableObjective();
     for (int i = 0; i < num_items; ++i) {
-        objective->SetCoefficient(x[i], dataset.pallets[i].profit);
+        objective->SetCoefficient(x[i], dataset.pallets[i].profit - epsilon);
     }
     objective->SetMaximization();
 
-    // Solve the problem.
     const operations_research::MPSolver::ResultStatus result_status = solver.Solve();
     
-    // Print the results.
     if (result_status == operations_research::MPSolver::OPTIMAL) {
         std::vector<Pallet> selectedPallets;
         totalProfit = 0;
