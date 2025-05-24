@@ -27,7 +27,7 @@ vector<int> maxDatasetSizePerAlgorithm = {
     34, // Brute Force with Backtracking
     std::numeric_limits<int>::max(), // Dynamic Programming
     std::numeric_limits<int>::max(), // Greedy Approach
-    std::numeric_limits<int>::max() // Integer Linear Programming (ILP)
+    1000000 // Integer Linear Programming (ILP)
 };
 
 vector<string> knapsackAlgorithmNames = {

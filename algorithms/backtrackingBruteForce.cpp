@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "../utils/structs.h"
+#include "../utils/compareSolutions.h"
 
 using namespace std;
 
@@ -38,7 +39,7 @@ void knapsackBacktrack(const Dataset &dataset, const vector<int> &remainingProfi
                        int &maxProfit, int &bestWeight,
                        vector<int> &currentSubset, vector<int> &bestSubset) {
     if (index == dataset.pallets.size()) {
-        if (currentWeight <= dataset.truckCapacity && currentProfit > maxProfit) {
+        if (better(currentWeight, currentProfit, maxProfit, currentSubset, bestSubset, dataset.truckCapacity)) {
             maxProfit = currentProfit;
             bestWeight = currentWeight;
             bestSubset = currentSubset;
@@ -47,7 +48,7 @@ void knapsackBacktrack(const Dataset &dataset, const vector<int> &remainingProfi
     }
 
     // Prune if even with all remaining profit, this path can't beat maxProfit
-    if (currentProfit + remainingProfitFrom[index] <= maxProfit) {
+    if (currentProfit + remainingProfitFrom[index] < maxProfit) {
         return;
     }
 
