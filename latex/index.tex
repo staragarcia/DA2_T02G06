@@ -1,0 +1,27 @@
+\chapter{README}
+\hypertarget{index}{}\label{index}\index{README@{README}}
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+Repositório para o segundo projeto de DA -\/ grupo T02\+G06\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Installing Dependencies}{Installing Dependencies}}\label{index_autotoc_md1}
+This project uses \href{https://developers.google.com/optimization}{\texttt{ Google\textquotesingle{}s OR-\/\+Tools}}, and therefore you need to install that tool to run it. You should install it under "{}ortools"{} in this project\textquotesingle{}s root folder. Make sure that under "{}ortools"{} there are folders named "{}lib"{} and "{}include"{}. You can find tutorials on how to install \href{https://developers.google.com/optimization/install/cpp}{\texttt{ here}}. Installing OR-\/\+Tools from binaries is generally quicker and less error prone, you just need to download the compressed files, extract them, rename the folder where "{}lib"{} and "{}include"{} are, and place it under this folder\textquotesingle{}s root folder. Don\textquotesingle{}t forget to follow the tutorial\textquotesingle{}s "{}\+Prerequisites"{} section.
+
+Alternatively to installing OR-\/\+Tools under "{}ortools"{} in this project\textquotesingle{}s root folder, you can edit this \href{CMakeLists.txt\#L7}{\texttt{ line}} so that it looks like this (don\textquotesingle{}t forget to replace with the actual path of the folder where you have the "{}lib"{} and "{}include"{} folders of OR-\/\+Tools)\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{set(ORTOOLS\_ROOT,\ <path\ to\ your\ OR-\/Tools\ installation>)}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Compiling and Running}{Compiling and Running}}\label{index_autotoc_md2}
+Before compiling, you should install all the dependencies. Read the section on installing dependencies.
+
+After installing dependencies, on most Unix-\/like environments (Like Linux, Mac\+OS, WSL in Windows, ...), you can open a terminal and use the following command in this project\textquotesingle{}s root folder to (re)compile and run the code\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./run.sh}
+
+\end{DoxyCode}
+
+
+Alternatively, manually use the \href{CMakeLists.txt}{\texttt{ CMake\+Lists}} file to generate the Makefile and then compile and run the executable. 

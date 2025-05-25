@@ -1,0 +1,76 @@
+\doxysection{algorithms/\+Greedy.cpp File Reference}
+\hypertarget{Greedy_8cpp}{}\label{Greedy_8cpp}\index{algorithms/Greedy.cpp@{algorithms/Greedy.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include "{}../utils/structs.\+h"{}}\newline
+Include dependency graph for Greedy.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{Greedy_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=206pt]{Greedy_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{Greedy_8cpp_ab8e8861a22478e9bdfc7c111d60eb1d2}{sort\+By\+Desc\+Ratio}} (const \mbox{\hyperlink{structPallet}{Pallet}} \&a, const \mbox{\hyperlink{structPallet}{Pallet}} \&b)
+\begin{DoxyCompactList}\small\item\em Sorts pallets by descending order. Tie\+Breakers are lower weight and then lower id. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ \mbox{\hyperlink{Greedy_8cpp_acc695510d69e7a1a6ab597df516653d9}{greedy\+Knapsack}} (\mbox{\hyperlink{structDataset}{Dataset}} \&dataset, int \&total\+Weight, int \&total\+Profit)
+\begin{DoxyCompactList}\small\item\em Solves the 0/1 Knapsack problem using a greedy algorithm. Sorts the pallets by profit-\/to-\/weight ratio and selects the highest ratio pallets that fit within the truck\textquotesingle{}s capacity. This does not guarantee an optimal solution, but is efficient for large datasets. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Greedy_8cpp_acc695510d69e7a1a6ab597df516653d9}\label{Greedy_8cpp_acc695510d69e7a1a6ab597df516653d9} 
+\index{Greedy.cpp@{Greedy.cpp}!greedyKnapsack@{greedyKnapsack}}
+\index{greedyKnapsack@{greedyKnapsack}!Greedy.cpp@{Greedy.cpp}}
+\doxysubsubsection{\texorpdfstring{greedyKnapsack()}{greedyKnapsack()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ greedy\+Knapsack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDataset}{Dataset}} \&}]{dataset,  }\item[{int \&}]{total\+Weight,  }\item[{int \&}]{total\+Profit }\end{DoxyParamCaption})}
+
+
+
+Solves the 0/1 Knapsack problem using a greedy algorithm. Sorts the pallets by profit-\/to-\/weight ratio and selects the highest ratio pallets that fit within the truck\textquotesingle{}s capacity. This does not guarantee an optimal solution, but is efficient for large datasets. 
+
+Final Time Complexity\+: O(n log n)
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & pallets and truck capacity \\
+\hline
+{\em total\+Weight} & total weight of selected pallets \\
+\hline
+{\em total\+Profit} & total profit of selected pallets \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Pallet$>$ selected pallets 
+\end{DoxyReturn}
+\Hypertarget{Greedy_8cpp_ab8e8861a22478e9bdfc7c111d60eb1d2}\label{Greedy_8cpp_ab8e8861a22478e9bdfc7c111d60eb1d2} 
+\index{Greedy.cpp@{Greedy.cpp}!sortByDescRatio@{sortByDescRatio}}
+\index{sortByDescRatio@{sortByDescRatio}!Greedy.cpp@{Greedy.cpp}}
+\doxysubsubsection{\texorpdfstring{sortByDescRatio()}{sortByDescRatio()}}
+{\footnotesize\ttfamily bool sort\+By\+Desc\+Ratio (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structPallet}{Pallet}} \&}]{a,  }\item[{const \mbox{\hyperlink{structPallet}{Pallet}} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Sorts pallets by descending order. Tie\+Breakers are lower weight and then lower id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First pallet to compare \\
+\hline
+{\em b} & Second pallet to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if a should come before b, false otherwise 
+\end{DoxyReturn}

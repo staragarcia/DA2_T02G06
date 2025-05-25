@@ -1,0 +1,57 @@
+\doxysection{Initialize\+Dataset.\+cpp}
+\hypertarget{InitializeDataset_8cpp_source}{}\label{InitializeDataset_8cpp_source}\index{utils/InitializeDataset.cpp@{utils/InitializeDataset.cpp}}
+\mbox{\hyperlink{InitializeDataset_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{structs_8h}{structs.h}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \mbox{\hyperlink{structDataset}{Dataset}}\ \mbox{\hyperlink{InitializeDataset_8cpp_ab2dcdb60ed8ec4b4521a4f3d5828b7b9}{readParseDataset}}(\textcolor{keyword}{const}\ std::string\&\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{structDataset}{Dataset}}\ dataset;}
+\DoxyCodeLine{00009\ \ \ \ \ std::string\ line;}
+\DoxyCodeLine{00010\ \ \ \ \ std::ifstream\ truckFile(\textcolor{stringliteral}{"{}datasets/TruckAndPallets\_"{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}.csv"{}});}
+\DoxyCodeLine{00011\ \ \ \ \ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordflow}{if}\ (!truckFile.is\_open())\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Could\ not\ open\ truck\ file.\(\backslash\)n"{}};}
+\DoxyCodeLine{00014\ \ \ \ \ \}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ std::getline(truckFile,\ line);\ \textcolor{comment}{//Skip\ first\ line}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ capacity,\ numPallets;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{char}\ comma;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (std::getline(truckFile,\ line))\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::istringstream\ iss(line);}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (iss\ >>\ capacity\ >>\ comma\ >>\ numPallets)\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \ \ \ \ dataset.\mbox{\hyperlink{structDataset_adebfd043d4578ea89aae0edeb793fb61}{truckCapacity}}\ =\ capacity;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ \ \ \ \ truckFile.close();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ std::ifstream\ palletFile(\textcolor{stringliteral}{"{}datasets/Pallets\_"{}}\ +\ \textcolor{keywordtype}{id}\ +\ \textcolor{stringliteral}{"{}.csv"{}});}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordflow}{if}\ (!palletFile.is\_open())\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ open\ pallet\ file\(\backslash\)n"{}};}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ std::getline(palletFile,\ line);\ \textcolor{comment}{//Skip\ first\ line}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordflow}{while}\ (std::getline(palletFile,\ line))\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (line.empty())\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::istringstream\ ss(line);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structPallet}{Pallet}}\ p;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ comma;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ss\ >>\ p.\mbox{\hyperlink{structPallet_a9e5a10be32ec564eeb8c62f057394cb0}{id}}\ >>\ comma\ >>\ p.\mbox{\hyperlink{structPallet_a216a90fe257bc40e1f5412dc9627b322}{weight}}\ >>\ comma\ >>\ p.\mbox{\hyperlink{structPallet_a73f875ee2c33b680d2d4ed218636a9fc}{profit}})\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ dataset.\mbox{\hyperlink{structDataset_a96c8bb1fafab976e0b57998166fe012f}{pallets}}.push\_back(p);}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ palletFile.close();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordflow}{return}\ dataset;\ }
+\DoxyCodeLine{00051\ \}}
+
+\end{DoxyCode}

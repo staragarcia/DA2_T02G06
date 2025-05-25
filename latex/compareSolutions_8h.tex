@@ -1,0 +1,91 @@
+\doxysection{utils/compare\+Solutions.h File Reference}
+\hypertarget{compareSolutions_8h}{}\label{compareSolutions_8h}\index{utils/compareSolutions.h@{utils/compareSolutions.h}}
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for compare\+Solutions.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=217pt]{compareSolutions_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{compareSolutions_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{compareSolutions_8h_aa94e59c523c3a02b9dd5f3fa2be5399a}{lex\+Compare}} (const vector$<$ int $>$ \&a, const vector$<$ int $>$ \&b)
+\begin{DoxyCompactList}\small\item\em Compares two integer vectors lexicographically. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{compareSolutions_8h_a7ff3767ade7720aed137465ff3329755}{better}} (int current\+Weight, int current\+Profit, int max\+Profit, const vector$<$ int $>$ \&current\+Subset, const vector$<$ int $>$ \&best\+Subset, int truck\+Capacity)
+\begin{DoxyCompactList}\small\item\em Determines if the current solution is better than the best found so far. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{compareSolutions_8h_a7ff3767ade7720aed137465ff3329755}\label{compareSolutions_8h_a7ff3767ade7720aed137465ff3329755} 
+\index{compareSolutions.h@{compareSolutions.h}!better@{better}}
+\index{better@{better}!compareSolutions.h@{compareSolutions.h}}
+\doxysubsubsection{\texorpdfstring{better()}{better()}}
+{\footnotesize\ttfamily bool better (\begin{DoxyParamCaption}\item[{int}]{current\+Weight,  }\item[{int}]{current\+Profit,  }\item[{int}]{max\+Profit,  }\item[{const vector$<$ int $>$ \&}]{current\+Subset,  }\item[{const vector$<$ int $>$ \&}]{best\+Subset,  }\item[{int}]{truck\+Capacity }\end{DoxyParamCaption})}
+
+
+
+Determines if the current solution is better than the best found so far. 
+
+Compares solutions based on weight, profit, subset size, and lexicographical order.
+\begin{DoxyItemize}
+\item Returns false if the current weight exceeds the truck capacity.
+\item Prefers higher profit.
+\item If profits are equal, prefers smaller subsets.
+\item If subset sizes are equal, prefers lexicographically smaller subsets.
+
+asymptotic complexity\+: O(n), where n is the size of the subsets.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Weight} & The total weight of the current subset. \\
+\hline
+{\em current\+Profit} & The total profit of the current subset. \\
+\hline
+{\em max\+Profit} & The maximum profit found so far. \\
+\hline
+{\em current\+Subset} & The current subset of items. \\
+\hline
+{\em best\+Subset} & The best subset found so far. \\
+\hline
+{\em truck\+Capacity} & The maximum allowed weight. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the current solution is better, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{compareSolutions_8h_aa94e59c523c3a02b9dd5f3fa2be5399a}\label{compareSolutions_8h_aa94e59c523c3a02b9dd5f3fa2be5399a} 
+\index{compareSolutions.h@{compareSolutions.h}!lexCompare@{lexCompare}}
+\index{lexCompare@{lexCompare}!compareSolutions.h@{compareSolutions.h}}
+\doxysubsubsection{\texorpdfstring{lexCompare()}{lexCompare()}}
+{\footnotesize\ttfamily bool lex\+Compare (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{a,  }\item[{const vector$<$ int $>$ \&}]{b }\end{DoxyParamCaption})}
+
+
+
+Compares two integer vectors lexicographically. 
+
+Iterates through both vectors and compares their elements one by one. Returns true if the first vector is lexicographically less than the second. If all elements are equal, returns false.
+
+asymptotic complexity\+: O(n), where n is the size of the vectors.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first vector to compare. \\
+\hline
+{\em b} & The second vector to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if vector a is lexicographically less than vector b, false otherwise. 
+\end{DoxyReturn}

@@ -1,0 +1,56 @@
+\doxysection{algorithms/brute\+Force.cpp File Reference}
+\hypertarget{bruteForce_8cpp}{}\label{bruteForce_8cpp}\index{algorithms/bruteForce.cpp@{algorithms/bruteForce.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include "{}../utils/structs.\+h"{}}\newline
+{\ttfamily \#include "{}../utils/compare\+Solutions.\+h"{}}\newline
+Include dependency graph for brute\+Force.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bruteForce_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{bruteForce_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ \mbox{\hyperlink{bruteForce_8cpp_a512701083f3eda9b381bc9cee643615d}{brute\+Force\+Knapsack}} (\mbox{\hyperlink{structDataset}{Dataset}} \&dataset, int \&total\+Weight, int \&total\+Profit)
+\begin{DoxyCompactList}\small\item\em Brute force solution for the 0/1 knapsack problem. Selects the best subset of pallets by checking all possible combinations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{bruteForce_8cpp_a512701083f3eda9b381bc9cee643615d}\label{bruteForce_8cpp_a512701083f3eda9b381bc9cee643615d} 
+\index{bruteForce.cpp@{bruteForce.cpp}!bruteForceKnapsack@{bruteForceKnapsack}}
+\index{bruteForceKnapsack@{bruteForceKnapsack}!bruteForce.cpp@{bruteForce.cpp}}
+\doxysubsubsection{\texorpdfstring{bruteForceKnapsack()}{bruteForceKnapsack()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ brute\+Force\+Knapsack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDataset}{Dataset}} \&}]{dataset,  }\item[{int \&}]{total\+Weight,  }\item[{int \&}]{total\+Profit }\end{DoxyParamCaption})}
+
+
+
+Brute force solution for the 0/1 knapsack problem. Selects the best subset of pallets by checking all possible combinations. 
+
+The asymptotic complexity of this algorithm is Θ(2\texorpdfstring{$^\wedge$}{\string^}n), where n is the number of pallets.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & pallets and truck capacity \\
+\hline
+{\em total\+Weight} & total weight of selected pallets \\
+\hline
+{\em total\+Profit} & total profit of selected pallets \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Pallet$>$ selected pallets 
+\end{DoxyReturn}

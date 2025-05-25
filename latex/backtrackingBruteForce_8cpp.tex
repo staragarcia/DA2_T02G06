@@ -1,0 +1,107 @@
+\doxysection{algorithms/backtracking\+Brute\+Force.cpp File Reference}
+\hypertarget{backtrackingBruteForce_8cpp}{}\label{backtrackingBruteForce_8cpp}\index{algorithms/backtrackingBruteForce.cpp@{algorithms/backtrackingBruteForce.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include "{}../utils/structs.\+h"{}}\newline
+{\ttfamily \#include "{}../utils/compare\+Solutions.\+h"{}}\newline
+Include dependency graph for backtracking\+Brute\+Force.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{backtrackingBruteForce_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=241pt]{backtrackingBruteForce_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ int $>$ \mbox{\hyperlink{backtrackingBruteForce_8cpp_aff10ce49cb67b9dc6be8979264247797}{compute\+Remaining\+Profits}} (const vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ \&pallets)
+\begin{DoxyCompactList}\small\item\em Function to compute the remaining profits from each index to the end of the pallets vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{backtrackingBruteForce_8cpp_a1d9a9d33bd1c304e57b3bbd80a46ecb3}{knapsack\+Backtrack}} (const \mbox{\hyperlink{structDataset}{Dataset}} \&dataset, const vector$<$ int $>$ \&remaining\+Profit\+From, int index, int current\+Weight, int current\+Profit, int \&max\+Profit, int \&best\+Weight, vector$<$ int $>$ \&current\+Subset, vector$<$ int $>$ \&best\+Subset)
+\begin{DoxyCompactList}\small\item\em Actual recursive backtracking function for the knapsack problem. \end{DoxyCompactList}\item 
+vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ \mbox{\hyperlink{backtrackingBruteForce_8cpp_a31dcd12feeaae301423d5b78503a9ed2}{backtracking\+Knapsack}} (\mbox{\hyperlink{structDataset}{Dataset}} \&dataset, int \&total\+Weight, int \&total\+Profit)
+\begin{DoxyCompactList}\small\item\em Solves the 0/1 Knapsack problem using backtracking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{backtrackingBruteForce_8cpp_a31dcd12feeaae301423d5b78503a9ed2}\label{backtrackingBruteForce_8cpp_a31dcd12feeaae301423d5b78503a9ed2} 
+\index{backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}!backtrackingKnapsack@{backtrackingKnapsack}}
+\index{backtrackingKnapsack@{backtrackingKnapsack}!backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}}
+\doxysubsubsection{\texorpdfstring{backtrackingKnapsack()}{backtrackingKnapsack()}}
+{\footnotesize\ttfamily vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ backtracking\+Knapsack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structDataset}{Dataset}} \&}]{dataset,  }\item[{int \&}]{total\+Weight,  }\item[{int \&}]{total\+Profit }\end{DoxyParamCaption})}
+
+
+
+Solves the 0/1 Knapsack problem using backtracking. 
+
+The asymptotic complexity of this algorithm is O(2\texorpdfstring{$^\wedge$}{\string^}n) in the worst case, where n is the number of pallets. However, the actual performance depends on the specific dataset and can be significantly improved with pruning techniques.
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & pallets and truck capacity \\
+\hline
+{\em total\+Weight} & used to return the total weight of the selected pallets \\
+\hline
+{\em total\+Profit} & used to return the total profit of the selected pallets \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$\+Pallet$>$ selected pallets 
+\end{DoxyReturn}
+\Hypertarget{backtrackingBruteForce_8cpp_aff10ce49cb67b9dc6be8979264247797}\label{backtrackingBruteForce_8cpp_aff10ce49cb67b9dc6be8979264247797} 
+\index{backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}!computeRemainingProfits@{computeRemainingProfits}}
+\index{computeRemainingProfits@{computeRemainingProfits}!backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}}
+\doxysubsubsection{\texorpdfstring{computeRemainingProfits()}{computeRemainingProfits()}}
+{\footnotesize\ttfamily vector$<$ int $>$ compute\+Remaining\+Profits (\begin{DoxyParamCaption}\item[{const vector$<$ \mbox{\hyperlink{structPallet}{Pallet}} $>$ \&}]{pallets }\end{DoxyParamCaption})}
+
+
+
+Function to compute the remaining profits from each index to the end of the pallets vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pallets} & pallets vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$int$>$ for each index i, the sum of profits from pallets\mbox{[}i\mbox{]} to pallets\mbox{[}n-\/1\mbox{]} 
+\end{DoxyReturn}
+\Hypertarget{backtrackingBruteForce_8cpp_a1d9a9d33bd1c304e57b3bbd80a46ecb3}\label{backtrackingBruteForce_8cpp_a1d9a9d33bd1c304e57b3bbd80a46ecb3} 
+\index{backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}!knapsackBacktrack@{knapsackBacktrack}}
+\index{knapsackBacktrack@{knapsackBacktrack}!backtrackingBruteForce.cpp@{backtrackingBruteForce.cpp}}
+\doxysubsubsection{\texorpdfstring{knapsackBacktrack()}{knapsackBacktrack()}}
+{\footnotesize\ttfamily void knapsack\+Backtrack (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structDataset}{Dataset}} \&}]{dataset,  }\item[{const vector$<$ int $>$ \&}]{remaining\+Profit\+From,  }\item[{int}]{index,  }\item[{int}]{current\+Weight,  }\item[{int}]{current\+Profit,  }\item[{int \&}]{max\+Profit,  }\item[{int \&}]{best\+Weight,  }\item[{vector$<$ int $>$ \&}]{current\+Subset,  }\item[{vector$<$ int $>$ \&}]{best\+Subset }\end{DoxyParamCaption})}
+
+
+
+Actual recursive backtracking function for the knapsack problem. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dataset} & pallets and truck capacity \\
+\hline
+{\em remaining\+Profit\+From} & vector of remaining profits from index i to end \\
+\hline
+{\em index} & index of the current pallet being considered \\
+\hline
+{\em current\+Weight} & current total weight of selected pallets \\
+\hline
+{\em current\+Profit} & current total profit of selected pallets \\
+\hline
+{\em max\+Profit} & current maximum profit found \\
+\hline
+{\em best\+Weight} & current best weight found \\
+\hline
+{\em current\+Subset} & current subset of selected pallets \\
+\hline
+{\em best\+Subset} & best subset of selected pallets found \\
+\hline
+\end{DoxyParams}
