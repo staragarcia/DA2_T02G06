@@ -1,0 +1,18 @@
+<map id="algorithms/bruteForce.cpp" name="algorithms/bruteForce.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="165,5,357,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,85,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,33,80,52,45,65,23,80,18,94,18,109,31,139,26,141,13,110,12,93,19,77,42,60,78,47,166,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="359,152,422,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="296,28,333,47,352,61,367,77,383,107,391,137,386,139,378,109,363,80,348,65,331,52,294,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="181,79,243,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="255,33,230,69,226,66,251,29"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="268,79,353,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="272,29,297,66,293,69,267,33"/>
+<area shape="rect" id="Node000006" href="$structs_8h.html" title=" " alt="" coords="33,79,156,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="236,33,135,76,133,71,234,28"/>
+<area shape="rect" id="Node000007" href="$compareSolutions_8h.html" title=" " alt="" coords="428,79,623,104"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="304,28,470,72,469,78,303,33"/>
+<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="89,106,63,142,59,139,84,103"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="143,101,347,150,345,155,142,107"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="505,106,426,148,424,143,502,102"/>
+</map>
