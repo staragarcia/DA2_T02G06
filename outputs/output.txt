@@ -1,46 +1,39 @@
 Results for all algorithms:
-Brute Force:
-Pallet ID: 5, Weight: 29, Profit: 10
-Pallet ID: 6, Weight: 26, Profit: 10
-Pallet ID: 8, Weight: 22, Profit: 10
-Pallet ID: 9, Weight: 20, Profit: 10
-Total Profit: 40
-Total Weight: 97
-Execution Time: 495 microseconds
-
 Brute Force with Backtracking:
-Pallet ID: 5, Weight: 29, Profit: 10
-Pallet ID: 6, Weight: 26, Profit: 10
-Pallet ID: 8, Weight: 22, Profit: 10
-Pallet ID: 9, Weight: 20, Profit: 10
-Total Profit: 40
-Total Weight: 97
-Execution Time: 17 microseconds
+Pallet ID: 1, Weight: 8, Profit: 8
+Pallet ID: 3, Weight: 4, Profit: 4
+Pallet ID: 7, Weight: 2, Profit: 2
+Pallet ID: 15, Weight: 1, Profit: 1
+Total Profit: 15
+Total Weight: 15
+Execution Time: 389765 microseconds
 
 Dynamic Programming:
-Pallet ID: 5, Weight: 29, Profit: 10
-Pallet ID: 6, Weight: 26, Profit: 10
-Pallet ID: 8, Weight: 22, Profit: 10
-Pallet ID: 9, Weight: 20, Profit: 10
-Total Profit: 40
-Total Weight: 97
-Execution Time: 840 microseconds
+Pallet ID: 1, Weight: 8, Profit: 8
+Pallet ID: 3, Weight: 4, Profit: 4
+Pallet ID: 7, Weight: 2, Profit: 2
+Pallet ID: 15, Weight: 1, Profit: 1
+Total Profit: 15
+Total Weight: 15
+Execution Time: 384 microseconds
 
 Greedy Approach:
-Pallet ID: 9, Weight: 20, Profit: 10
-Pallet ID: 8, Weight: 22, Profit: 10
-Pallet ID: 6, Weight: 26, Profit: 10
-Pallet ID: 7, Weight: 26, Profit: 10
-Total Profit: 40
-Total Weight: 94
+Pallet ID: 1, Weight: 8, Profit: 8
+Pallet ID: 3, Weight: 4, Profit: 4
+Pallet ID: 7, Weight: 2, Profit: 2
+Pallet ID: 15, Weight: 1, Profit: 1
+Total Profit: 15
+Total Weight: 15
 Execution Time: 7 microseconds
 
 Integer Linear Programming (ILP):
-Pallet ID: 9, Weight: 20, Profit: 10
-Pallet ID: 8, Weight: 22, Profit: 10
-Pallet ID: 6, Weight: 26, Profit: 10
-Pallet ID: 7, Weight: 26, Profit: 10
-Total Profit: 40
-Total Weight: 94
-Execution Time: 8056 microseconds
+Pallet ID: 5, Weight: 4, Profit: 4
+Pallet ID: 6, Weight: 4, Profit: 4
+Pallet ID: 12, Weight: 2, Profit: 2
+Pallet ID: 13, Weight: 2, Profit: 2
+Pallet ID: 14, Weight: 2, Profit: 2
+Pallet ID: 15, Weight: 1, Profit: 1
+Total Profit: 15
+Total Weight: 15
+Execution Time: 3112 microseconds
 
