@@ -146,6 +146,8 @@ void runAllAlgorithms(Dataset &dataset) {
 
     for (size_t i = 0; i < knapsackAlgorithms.size(); ++i) {
         cout << gray << "-------------------------------------\n" << reset;
+        cout << blue << knapsackAlgorithmNames[i] << ":" << reset << endl; // <-- Move this line up
+
         int totalWeight = 0, totalProfit = 0;
 
         if (dataset.pallets.size() > maxDatasetSizePerAlgorithm[i]) {
@@ -165,7 +167,6 @@ void runAllAlgorithms(Dataset &dataset) {
         auto end = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(end - start);
 
-        cout << blue << knapsackAlgorithmNames[i] << ":" << reset << endl;
         if (success) {
             cout << green << "  Success!" << reset << endl;
             cout << "  Selected Pallet IDs: " << gray;
