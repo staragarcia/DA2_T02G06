@@ -1,4 +1,4 @@
-# DA2_T02G06
+# README
 Repositório para o segundo projeto de DA - grupo T02G06
 
 ## Installing Dependencies
