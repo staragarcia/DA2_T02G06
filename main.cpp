@@ -15,6 +15,7 @@
 using namespace std;
 using namespace std::chrono;
 
+/// @cond
 // Colors
 const string blue = "\033[34m";
 const string gray = "\033[90m";
@@ -22,6 +23,7 @@ const string yellow = "\033[33m";
 const string green = "\033[32m";
 const string red = "\033[31m";
 const string reset = "\033[0m";
+/// @endcond
 
 vector<function<vector<Pallet>(Dataset&, int&, int&)>> knapsackAlgorithms = {
     bruteForceKnapsack,
@@ -47,7 +49,9 @@ vector<string> knapsackAlgorithmNames = {
     "Integer Linear Programming (ILP)"
 };
 
-
+/**
+ * @brief Displays the main menu for the user interface.
+ */
 void displayMenu() {  
     cout << gray << "\n=====================================\n" << reset;
     cout << blue << "  Pallet Packing Optimization Tool\n" << reset;
@@ -58,6 +62,9 @@ void displayMenu() {
     cout << blue << "Enter your choice: " << reset;
 }
 
+/**
+ * @brief Shows the list of available algorithm options.
+ */
 void displayAlgorithmOptions() {  
     cout << yellow << "1." << reset << " Brute Force\n";
     cout << yellow << "2." << reset << " Brute Force with Backtracking\n";
@@ -70,6 +77,9 @@ void displayAlgorithmOptions() {
     cout << blue << "Enter your choice: " << reset;
 }
 
+/**
+ * @brief Handles the execution of the selected algorithm and displays results.
+ */
 void handleAlgorithmSelection(int choice, Dataset &dataset) {
     if (choice < 1 || choice > 5) {
         cout << red << "Invalid choice. Please try again.\n" << reset;
@@ -123,6 +133,9 @@ void handleAlgorithmSelection(int choice, Dataset &dataset) {
     }
 }
 
+/**
+ * @brief Runs all available algorithms on the current dataset and outputs results.
+ */
 void runAllAlgorithms(Dataset &dataset) {
     cout << gray << "\n=====================================\n" << reset;
     cout << "Running all algorithms on the current dataset:\n" << reset;
@@ -191,6 +204,9 @@ void runAllAlgorithms(Dataset &dataset) {
     }
 }
 
+/**
+ * @brief Processes the user's main menu selection.
+ */
 void handleMenuSelection(int choice, Dataset &dataset) {
     switch (choice) {
         case 1: {
