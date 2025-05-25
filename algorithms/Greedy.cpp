@@ -22,13 +22,17 @@ bool sortByDescRatio(const Pallet& a, const Pallet& b) {
 }
 
 /**
- * @brief Greedy Knapsack Algorithm implementation.
+ * @brief Solves the 0/1 Knapsack problem using a greedy algorithm.
+ * Sorts the pallets by profit-to-weight ratio and selects the highest ratio pallets
+ * that fit within the truck's capacity. This does not guarantee an optimal solution,
+ * but is efficient for large datasets.
+ *
  * @details Final Time Complexity: O(n log n)
  * 
- * @param dataset 
- * @param totalWeight 
- * @param totalProfit 
- * @return vector<Pallet> 
+ * @param dataset pallets and truck capacity
+ * @param totalWeight total weight of selected pallets
+ * @param totalProfit total profit of selected pallets
+ * @return vector<Pallet> selected pallets
  */
 vector<Pallet> greedyKnapsack (Dataset& dataset, int &totalWeight, int &totalProfit) { // O(n)
     for (Pallet &p : dataset.pallets) {

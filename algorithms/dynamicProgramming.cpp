@@ -25,13 +25,17 @@ bool isBetter(const State& a, const State& b) {
 }
 
 /**
- * @brief 
+ * @brief Finds the optimal subset of pallets to maximize profit without exceeding the truck's capacity using dynamic programming.
+ * 
+ * This function constructs a DP table to evaluate all possible combinations of pallets and capacities,
+ * making sure the selected set has the highest possible profit while staying within the weight limit.
+ * 
  * @details  Time Complexity: O(i × j)
  * 
- * @param dataset 
- * @param totalWeight 
- * @param totalProfit 
- * @return vector<Pallet> 
+ * @param dataset pallets and truck capacity
+ * @param totalWeight total weight of selected pallets
+ * @param totalProfit total profit of selected pallets
+ * @return vector<Pallet> selected pallets
  */
 vector<Pallet> dynamicKnapsack(Dataset& dataset, int &totalWeight, int &totalProfit) {
     int i = dataset.pallets.size();
